@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1024762240281",
+    "project_id": "dusty-chat-agent",
+    "storage_bucket": "dusty-chat-agent.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024762240281:android:4f1c8310052a4c7b43f988",
+        "android_client_info": {
+          "package_name": "com.example.dusty_chat_agent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxVwQEQB5qqCxTio_KOAEjl0RWQlIGVeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

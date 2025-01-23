@@ -1,0 +1,46 @@
+[debug] [2025-01-23T10:00:00.139Z] ----------------------------------------------------------------------
+[debug] [2025-01-23T10:00:00.143Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-01-23T10:00:00.143Z] CLI Version:   13.29.2
+[debug] [2025-01-23T10:00:00.143Z] Platform:      win32
+[debug] [2025-01-23T10:00:00.144Z] Node Version:  v20.11.1
+[debug] [2025-01-23T10:00:00.144Z] Time:          Thu Jan 23 2025 19:00:00 GMT+0900 (대한민국 표준시)
+[debug] [2025-01-23T10:00:00.144Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-01-23T10:00:00.151Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-01-23T10:00:00.151Z] > authorizing via signed-in user (soyoung@dustydraft.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\user\dev\dusty_agent\dusty_chat_agent
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-01-23T10:00:22.757Z] Checked if tokens are valid: true, expires at: 1737628204278
+[debug] [2025-01-23T10:00:22.757Z] Checked if tokens are valid: true, expires at: 1737628204278
+[debug] [2025-01-23T10:00:22.762Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-01-23T10:00:23.535Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-01-23T10:00:23.535Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project dusty-chat-agent (dusty-chat-agent) 
+[info] 
+=== Hosting Setup
+[debug] [2025-01-23T10:00:25.869Z] Checked if tokens are valid: true, expires at: 1737628204278
+[debug] [2025-01-23T10:00:25.870Z] Checked if tokens are valid: true, expires at: 1737628204278
+[debug] [2025-01-23T10:00:25.870Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dusty-chat-agent [none]
+[debug] [2025-01-23T10:00:26.217Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dusty-chat-agent 200
+[debug] [2025-01-23T10:00:26.218Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dusty-chat-agent {"projectId":"dusty-chat-agent","projectNumber":"1024762240281","displayName":"dusty-chat-agent","name":"projects/dusty-chat-agent","resources":{"hostingSite":"dusty-chat-agent"},"state":"ACTIVE","etag":"1_e7341f65-dc1b-477c-ac75-4cac2f5066d4"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
