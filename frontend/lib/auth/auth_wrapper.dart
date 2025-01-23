@@ -2,7 +2,7 @@ import 'package:dusty_chat_agent/auth/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dusty_chat_agent/pages/profile_page.dart';
-import 'package:dusty_chat_agent/pages/login_page.dart'; // 로그인 페이지 임포트
+import 'package:dusty_chat_agent/auth/login_page.dart'; // 로그인 페이지 임포트
 
 class AuthWrapper extends StatelessWidget {
   @override
