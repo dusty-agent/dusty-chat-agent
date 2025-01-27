@@ -42,12 +42,33 @@ class CommonDrawer extends StatelessWidget {
           ),
           ListTile(
             // leading: Icon(Icons.info),
+            title: Text('log in'),
+            onTap: () {
+              Navigator.pushNamed(context, '/login');
+            },
+          ),
+          ListTile(
+            // leading: Icon(Icons.info),
             title: Text('Join us'),
             onTap: () {
-              Navigator.pushNamed(context, '/join-us');
+              Navigator.pushNamed(context, '/signup');
             },
           ),
           const Divider(), // 구분선
+          ListTile(
+            // leading: Icon(Icons.info),
+            title: Text('AuthWrapper Test'),
+            onTap: () {
+              Navigator.pushNamed(context, '/auth');
+            },
+          ),
+          ListTile(
+            // leading: Icon(Icons.info),
+            title: Text('Profile Test'),
+            onTap: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+          ),
         ],
       ),
     );

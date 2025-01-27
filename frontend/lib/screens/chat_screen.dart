@@ -1,5 +1,3 @@
-/* screens/chat_screen.dart */
-
 import 'package:dusty_chat_agent/provider/gpt_provider.dart';
 import 'package:dusty_chat_agent/widgets/app_bar.dart';
 import 'package:dusty_chat_agent/widgets/drawer.dart';
@@ -9,7 +7,6 @@ import 'package:provider/provider.dart';
 import '/services/chat_service.dart'; // 서비스 파일을 import
 
 class ChatScreen extends StatefulWidget {
-  // final TextEditingController _controller = TextEditingController();
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -47,49 +44,56 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: CommonAppBar(titleText: 'AI Chatbot', logoPath: logoPath),
       drawer: CommonDrawer(),
       bottomNavigationBar: buildFooter(context),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: 5),
-          Text(
-            '현재 모델: ${gptProvider.modelName}', // 모델명 표시
-            style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                final message = messages[index];
-                return ListTile(
-                  title: Text(
-                    message['content'] ?? '',
-                    textAlign: message['role'] == 'user'
-                        ? TextAlign.right
-                        : TextAlign.left,
-                  ),
-                );
-              },
+      body: SingleChildScrollView(
+        // 전체 화면을 SingleChildScrollView로 감쌈
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 5),
+            Text(
+              '현재 모델: ${gptProvider.modelName}', // 모델명 표시
+              style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: controller,
-                    decoration: InputDecoration(hintText: 'Enter your message'),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () => sendMessage(controller.text),
-                ),
-              ],
+            // 메시지 목록 부분
+            Container(
+              height:
+                  MediaQuery.of(context).size.height * 0.6, // 화면 높이의 60%로 고정
+              child: ListView.builder(
+                itemCount: messages.length,
+                itemBuilder: (context, index) {
+                  final message = messages[index];
+                  return ListTile(
+                    title: Text(
+                      message['content'] ?? '',
+                      textAlign: message['role'] == 'user'
+                          ? TextAlign.right
+                          : TextAlign.left,
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          SizedBox(height: 5),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: controller,
+                      decoration:
+                          InputDecoration(hintText: 'Enter your message'),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: () => sendMessage(controller.text),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 5),
+          ],
+        ),
       ),
     );
   }

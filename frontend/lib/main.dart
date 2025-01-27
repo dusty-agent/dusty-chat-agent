@@ -1,3 +1,6 @@
+import 'package:dusty_chat_agent/auth/auth_wrapper.dart';
+import 'package:dusty_chat_agent/auth/login_page.dart';
+import 'package:dusty_chat_agent/auth/sign_up_page.dart';
 import 'package:dusty_chat_agent/pages/history.dart';
 import 'package:dusty_chat_agent/pages/profile_page.dart';
 import 'package:dusty_chat_agent/provider/gpt_provider.dart';
@@ -39,17 +42,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Roboto',
+        primaryColor: Color.fromARGB(255, 86, 179, 151), // 기본 색상
+        fontFamily: 'Barlow', // Barlow 폰트를 전역으로 적용
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(fontSize: 16), // 기본 본문 텍스트 스타일
+          bodyMedium: TextStyle(fontSize: 14), // 작은 본문 텍스트 스타일
+          displayLarge: TextStyle(
+              fontSize: 32, fontWeight: FontWeight.bold), // 큰 제목 텍스트 스타일
+          titleLarge: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold), // 중간 제목 텍스트 스타일
+          bodySmall:
+              TextStyle(fontSize: 12, fontStyle: FontStyle.italic), // 캡션 스타일
+        ),
       ),
       home: SplashScreen(),
       routes: {
-        // '/': (context) => SplashScreen(),
+        '/splash': (context) => SplashScreen(),
+        '/auth': (context) => AuthWrapper(),
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
         '/profile': (context) => ProfilePage(
             userName: "Dusty Agent", // 실제 사용자 이름
             userEmail: "soyoung@dustydraft.com"), // 실제 사용자 이메일),
         '/history': (content) => HistoryPage(),
-        '/about-us': (content) => HistoryPage(),
         '/chat': (context) => ChatScreen(), // 추가
       },
     );
@@ -69,7 +84,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _navigateToHome();
-    _callChatService();
     _initializeApp();
   }
 
@@ -97,23 +111,6 @@ class _SplashScreenState extends State<SplashScreen> {
       context,
       MaterialPageRoute(builder: (context) => ChatScreen()), // ChatScreen으로 이동
     );
-  }
-
-  // ChatService의 sendMessage 메서드 호출
-  _callChatService() async {
-    try {
-      String message = "Hello, this is a test message!";
-      String response = await ChatService.sendMessage(message);
-      if (kDebugMode) {
-        // 디버그 모드일 때만 로그 출력
-        print("Response from ChatService: $response");
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        // 에러도 디버그 모드일 때만 출력
-        print("Error: $e");
-      }
-    }
   }
 
   @override
