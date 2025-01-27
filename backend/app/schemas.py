@@ -13,4 +13,4 @@ class MessageResponse(MessageBase):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        orm_mode = True  # ORM 모델을 Pydantic 모델로 변환할 수 있도록 설정

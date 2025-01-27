@@ -42,9 +42,9 @@ class CommonDrawer extends StatelessWidget {
           ),
           ListTile(
             // leading: Icon(Icons.info),
-            title: Text('About us'),
+            title: Text('Join us'),
             onTap: () {
-              Navigator.pushNamed(context, '/about-us');
+              Navigator.pushNamed(context, '/join-us');
             },
           ),
           const Divider(), // 구분선

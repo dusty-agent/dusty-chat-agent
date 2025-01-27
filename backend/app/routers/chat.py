@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from app.models.models import Message
+from app.models.message import Message
 from app.dependencies import get_db
 from pydantic import BaseModel
 from datetime import datetime

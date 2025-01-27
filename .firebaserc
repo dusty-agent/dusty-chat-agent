@@ -1,0 +1,13 @@
+{
+  "projects": {},
+  "targets": {
+    "dusty-chat-agent": {
+      "hosting": {
+        "dusty-chat-agent": [
+          "dusty-chat-agent"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

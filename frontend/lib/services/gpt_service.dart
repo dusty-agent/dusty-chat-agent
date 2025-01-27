@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class GptService {
   final String apiUrl = 'https://api.openai.com/v1/completions';
-  final String apiKey = 'sk-...7ibM'; // 'YOUR_API_KEY';
+  final String apiKey = 'OPENAI_API_KEY' ?? ''; //
 
   Future<String> fetchGptResponse(String prompt) async {
     final response = await http.post(

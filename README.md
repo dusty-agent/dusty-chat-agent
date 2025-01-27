@@ -41,3 +41,21 @@ project-root/
 │   └── .env             # API 키 및 환경 변수
 │
 └── README.md            # 프로젝트 설명 파일
+
+
+flutter_project/
+├── lib/
+│   ├── main.dart                # 앱의 진입점
+│   ├── services/
+│   │   ├── chat_service.dart    # 채팅 관련 서비스 (메시지 저장 및 전송)
+│   │   └── gpt_service.dart     # GPT 연동 관련 서비스
+│   ├── screens/
+│   │   ├── home_screen.dart     # 홈 화면
+│   │   └── login_screen.dart    # 로그인 화면
+│   ├── models/
+│   │   └── message.dart         # 메시지 모델 (예: message_id, content 등)
+│   └── utils/
+│       └── local_storage.dart   # 로컬 저장소 관련 코드 (SharedPreferences)
+├── pubspec.yaml                 # 의존성 파일
+└── android/                     # Android 앱 관련 디렉토리
+└── ios/                         # iOS 앱 관련 디렉토리
