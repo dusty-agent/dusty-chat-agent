@@ -9,20 +9,6 @@ from app.database.database import engine, Base
 from app.models.message import Message
 from app.dependencies import get_db 
 
-# 테스트용 데이터 삽입
-def test_db_connection():
-    with Session(engine) as session:
-        # 데이터 삽입
-        new_message = Message(content="Test Message", user_id=1)  # 적절한 필드값을 사용
-        session.add(new_message)
-        session.commit()
-        
-        # 데이터 조회
-        message = session.query(Message).first()
-        print(f"첫 번째 메시지: {message.content}")
-
-test_db_connection()
-
 # 애플리케이션 초기화
 app = FastAPI()
 

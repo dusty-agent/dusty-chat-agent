@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "default": "dusty-chat-agent"
+  },
   "targets": {
     "dusty-chat-agent": {
       "hosting": {

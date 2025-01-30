@@ -1,13 +1,10 @@
 {
-    "hosting": {
-      "target": "dusty-chat-agent",
-      "public": "public",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [{"source": "**", "destination": "/index.html"}]
-    }
+  "hosting": {
+    "public": "frontend/build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
-  
+}

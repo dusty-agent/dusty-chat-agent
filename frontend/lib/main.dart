@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
       ),
       home: SplashScreen(),
       routes: {
-        '/splash': (context) => SplashScreen(),
+        // '/splash': (context) => SplashScreen(),
         '/auth': (context) => AuthWrapper(),
         '/login': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
@@ -83,7 +83,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToHome();
     _initializeApp();
   }
 

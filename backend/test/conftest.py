@@ -2,7 +2,7 @@
 
 from sqlalchemy import MetaData
 from app.database.database import engine
-from app.models.models import Base
+from backend.app.models.message import Base
 
 def reset_db():
     metadata = MetaData()
