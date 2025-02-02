@@ -1,5 +1,6 @@
 // firebase_options.dart
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
@@ -12,7 +13,7 @@ import 'package:firebase_core/firebase_core.dart';
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     // Web 플랫폼에 맞는 FirebaseOptions을 리턴합니다
-    if (Firebase.apps.isEmpty) {
+    if (kIsWeb) {
       return const FirebaseOptions(
           apiKey: "AIzaSyA-KJUzNnW8gtlCrndqDmezC3jtBZ0UFpc",
           authDomain: "dusty-chat-agent.firebaseapp.com",
@@ -22,7 +23,6 @@ class DefaultFirebaseOptions {
           appId: "1:1024762240281:web:b9472e52e8390aaa43f988",
           measurementId: "G-JNC54BQ726");
     }
-    ;
     // Initialize Firebase
     // const app = initializeApp(firebaseConfig);
     // const analytics = getAnalytics(app);

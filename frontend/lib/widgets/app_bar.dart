@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String logoPath; // 특정 페이지에 따라 이미지 경로
   final String titleText; // 타이틀 텍스트
 
   const CommonAppBar({
     super.key,
-    required this.logoPath,
     required this.titleText,
   });
 
@@ -16,7 +14,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent, //transparent,
+      backgroundColor: Colors.transparent,
       elevation: 1,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +24,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pushNamed(context, '/');
             },
             child: Image.asset(
-              logoPath, // 이미지 경로
+              'assets/images/icon-dusty-agent.png',
               height: 32,
             ),
           ),
@@ -41,11 +39,20 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.person), // 다국어 버튼
+          icon: const Icon(Icons.person), // ✅ 프로필 아이콘
           tooltip: 'My Profile',
           onPressed: () {
             Navigator.pushNamed(context, '/profile');
           },
+        ),
+        Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu), // ✅ 햄버거 메뉴 아이콘
+            tooltip: 'Menu',
+            onPressed: () {
+              Scaffold.of(context).openEndDrawer(); // ✅ 오른쪽에서 Drawer 열기
+            },
+          ),
         ),
       ],
     );

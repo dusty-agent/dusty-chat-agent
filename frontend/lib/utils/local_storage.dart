@@ -1,31 +1,41 @@
-// utils/local_storage.dart
-
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-  // 데이터 저장 (로그인하지 않은 사용자의 메시지)
+  static const String _messagesKey = 'messages';
+  static const String _emailKey = 'email';
+
+  /// ✅ **로그인하지 않은 사용자의 메시지 저장**
   static Future<void> saveMessage(String message) async {
     final prefs = await SharedPreferences.getInstance();
-    final currentMessages = prefs.getStringList('messages') ?? [];
+    final currentMessages = prefs.getStringList(_messagesKey) ?? [];
     currentMessages.add(message);
-    await prefs.setStringList('messages', currentMessages);
+    await prefs.setStringList(_messagesKey, currentMessages);
   }
 
-  // 메시지 가져오기
+  /// ✅ **저장된 메시지 가져오기**
   static Future<List<String>> getMessages() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList('messages') ?? [];
+    return prefs.getStringList(_messagesKey) ?? [];
   }
 
-  // 로그인 정보 저장
+  /// ✅ **로그인 정보 저장**
   static Future<void> saveLoginInfo(String email) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', email);
+    await prefs.setString(_emailKey, email);
   }
 
-  // 로그인 정보 가져오기
+  /// ✅ **저장된 로그인 정보 가져오기**
   static Future<String?> getLoginInfo() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('email');
+    return prefs.getString(_emailKey);
   }
+}
+
+/// ✅ **앱 내부 로그 저장 (디버깅용)**
+Future<void> saveLog(String message) async {
+  final directory = await getApplicationDocumentsDirectory();
+  final file = File('${directory.path}/app_logs.txt');
+  await file.writeAsString('$message\n', mode: FileMode.append);
 }

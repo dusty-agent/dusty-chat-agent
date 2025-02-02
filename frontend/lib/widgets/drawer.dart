@@ -64,9 +64,9 @@ class CommonDrawer extends StatelessWidget {
           ),
           ListTile(
             // leading: Icon(Icons.info),
-            title: Text('Profile Test'),
+            title: Text('휴지통'),
             onTap: () {
-              Navigator.pushNamed(context, '/profile');
+              Navigator.pushNamed(context, '/trash');
             },
           ),
         ],

@@ -1,6 +1,9 @@
+import 'package:dusty_chat_agent/widgets/custom_scaffold.dart';
+import 'package:dusty_chat_agent/widgets/drawer.dart';
+import 'package:dusty_chat_agent/widgets/footer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,97 +13,65 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
   String? _errorMessage;
 
-  // 로그인 로직 작성
-  Future<void> signIn(String email, String password) async {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null; // Reset error message
-    });
-
+  Future<void> signIn() async {
+    setState(() => _isLoading = true);
     try {
-      final userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+      final userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
-      // 로그인 성공 시 프로필 페이지로 이동
-      Navigator.pushReplacementNamed(context, '/profile');
+
+      // Firestore에서 사용자 플랜 정보 가져오기
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .get();
+
+      final userPlan = userDoc.exists && userDoc.data() != null
+          ? userDoc.data()!['plan'] ?? 'free'
+          : 'free';
+
+      if (userPlan == 'premium') {
+        Navigator.pushReplacementNamed(context, '/profile');
+      } else {
+        Navigator.pushReplacementNamed(context, '/pricing'); // 결제 페이지 이동
+      }
     } on FirebaseAuthException catch (e) {
-      setState(() {
-        _isLoading = false;
-        _errorMessage = e.message; // Set error message
-      });
+      setState(() => _errorMessage = e.message);
     }
+    setState(() => _isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+    return CustomScaffold(
+      titleText: 'Login',
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Email Input Field
             TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                errorText:
-                    _errorMessage != null && !_isLoading ? _errorMessage : null,
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(height: 16),
-
-            // Password Input Field
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email')),
             TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                errorText:
-                    _errorMessage != null && !_isLoading ? _errorMessage : null,
-              ),
-              obscureText: true,
-            ),
+                controller: passwordController,
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true),
+            if (_errorMessage != null)
+              Text(_errorMessage!, style: TextStyle(color: Colors.red)),
             SizedBox(height: 16),
-
-            // Login Button
             ElevatedButton(
-              onPressed: _isLoading
-                  ? null
-                  : () {
-                      // Validate input fields
-                      if (emailController.text.isEmpty ||
-                          passwordController.text.isEmpty) {
-                        setState(() {
-                          _errorMessage = 'Please fill in all fields.';
-                        });
-                      } else if (!EmailValidator.validate(
-                          emailController.text)) {
-                        setState(() {
-                          _errorMessage = 'Invalid email format.';
-                        });
-                      } else {
-                        signIn(emailController.text.trim(),
-                            passwordController.text.trim());
-                      }
-                    },
+              onPressed: _isLoading ? null : signIn,
               child: _isLoading
                   ? CircularProgressIndicator(color: Colors.white)
                   : Text('Login'),
             ),
-
-            SizedBox(height: 16),
-
-            // Sign Up Redirect
             TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/signup');
-              },
+              onPressed: () => Navigator.pushNamed(context, '/signup'),
               child: Text("Don't have an account? Sign Up"),
             ),
           ],

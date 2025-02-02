@@ -1,6 +1,4 @@
-import 'package:dusty_chat_agent/widgets/app_bar.dart';
-import 'package:dusty_chat_agent/widgets/drawer.dart';
-import 'package:dusty_chat_agent/widgets/footer.dart';
+import 'package:dusty_chat_agent/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -13,11 +11,8 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String logoPath = 'images/icon-dusty-agent.png';
-    return Scaffold(
-      appBar: CommonAppBar(titleText: 'AI Chatbot', logoPath: logoPath),
-      drawer: CommonDrawer(),
-      bottomNavigationBar: buildFooter(context),
+    return CustomScaffold(
+      titleText: 'Chat History',
       body: chatHistory.isEmpty
           ? Center(
               child: Text(

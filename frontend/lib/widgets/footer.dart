@@ -1,6 +1,7 @@
 import 'package:dusty_chat_agent/pages/private_policy_page.dart';
 import 'package:dusty_chat_agent/pages/terms_of_service_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget buildFooter(BuildContext context) {
   return Container(
@@ -11,10 +12,18 @@ Widget buildFooter(BuildContext context) {
       children: [
         _buildFooterLinks(context),
         const SizedBox(height: 8),
-        const Text(
-          '© 2025 Draft Co. All rights reserved.',
-          style: TextStyle(fontSize: 14, color: Colors.black54),
-          textAlign: TextAlign.center,
+        GestureDetector(
+          // ✅ 클릭 가능한 요소 추가
+          onTap: () => _launchURL("https://draft.best"), // ✅ 링크 열기
+          child: const Text(
+            '© 2025 Draft Co. All rights reserved.',
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.black54,
+              decoration: TextDecoration.underline, // ✅ 밑줄 추가 (클릭 가능하다는 시각적 힌트)
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     ),
@@ -53,6 +62,16 @@ Widget _buildFooterLink(BuildContext context,
   );
 }
 
+/// ✅ **웹사이트 링크 열기**
+Future<void> _launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw "Could not launch $url";
+  }
+}
+
+/// ✅ **페이지 이동**
 void _navigateTo(BuildContext context, Widget page) {
   Navigator.push(
     context,
